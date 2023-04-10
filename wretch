@@ -1,0 +1,28 @@
+import wretch from "wretch";
+const defaultHeaderParams = () => ({
+  "Content-Type": "application/json"
+});
+
+export const api = {
+  get: () => {
+    wretch("https://reqres.in/api/users?page=2")
+      .get()
+      .json()
+      .then((data) => console.log("data--", data));
+  },
+  post: (url, params = {}) => {
+    wretch("https://reqres.in/apis/")
+      .url("register")
+      .headers({
+        ...defaultHeaderParams,
+        ...params.headers
+      })
+      .post({
+        email: "eve.holt@reqres.in",
+        password: "pistol"
+      })
+      .res((data) => data.json())
+      .then((dataa) => console.log("datatata---", dataa))
+      .catch((err) => console.log("err---", err));
+  }
+};
